@@ -246,9 +246,12 @@ class DPC(ABC):
 
         logger.debug("Optimization problem has been built.")
 
-    def solve(self, verbose: bool = False, solver: str = cp.OSQP, **kwargs):
+    def solve(self, verbose: bool = False, solver: str = cp.SCS, **kwargs):
         """
         Solves the optimization problem to calculate the optimal control input.
+
+        Recommended to use `MOSEK`.
+        SCS solver used as it does not require a license
 
         Args:
             verbose (bool): If True, solver output is displayed.
@@ -280,9 +283,6 @@ class DPC(ABC):
                     "Optimization problem is not valid. "
                     "Ensure that `build_optimization_problem(self)` has been called before solving."
                 )
-
-            if solver is not cp.MOSEK:
-                logger.warning("Recommended to use MOSEK for performance. Currently using: %s", solver)
 
             self.problem.solve(solver=solver, verbose=verbose, **kwargs)
 
