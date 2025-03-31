@@ -5,6 +5,7 @@ With those maps, the parametrized test and be created.
 
 import numpy as np
 
+from do_ddpc.control_utils.control_structs import Bounds
 from do_ddpc.control_utils.lti_systems import (
     create_pre_stabilized_1D_double_integrator,
     create_1D_double_integrator,
@@ -13,9 +14,7 @@ from do_ddpc.control_utils.lti_systems import (
 )
 from do_ddpc.control_utils.pid_profiles import THREE_D_DOUBLE_INT_PID_COMBO, ONE_D_DOUBLE_INT_PID_COMBO
 from do_ddpc.ddpc.ddpc_structs import DPCParameters
-from do_ddpc.control_utils.control_structs import Bounds
 from do_ddpc.ddpc.gamma_ddpc import GammaDPC
-from do_ddpc.ddpc.mpc_nfour_sid import MPCNFourSID
 from do_ddpc.ddpc.mpc_oracle import MPCOracle
 from do_ddpc.ddpc.spc import SPC
 from do_ddpc.ddpc.tpc import TPC
