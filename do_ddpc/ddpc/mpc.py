@@ -219,7 +219,7 @@ class MPC(DPC, ABC):
 
         self.x_cp.value = x_new
 
-    def solve(self, verbose: bool = False, solver: str = cp.MOSEK, **kwargs):
+    def solve(self, verbose: bool = False, solver: str = cp.SCS, **kwargs):
         """
         Solves the optimization problem for the MPC controller.
 
@@ -230,8 +230,8 @@ class MPC(DPC, ABC):
                Otherwise, it solves the optimization problem as implemented in the DPC class.
 
         """
-        u = self.z_p_cp.value[-self.dims.m :]
-        y = self.z_p_cp.value[-self.dims.mp : -self.dims.m]
+        u = self.z_p_cp.value[-self.dims.m :]  # type: ignore
+        y = self.z_p_cp.value[-self.dims.mp : -self.dims.m]  # type: ignore
 
         # Update state with Kalman Filter
         self.x_cp.value = self.sys_matrices.sys.A @ self.x_cp.value + self.sys_matrices.sys.B @ u  # type: ignore
@@ -251,7 +251,7 @@ class MPC(DPC, ABC):
             self.control_step = 0
         else:
             # For constrained problem, solve the built optimization problem
-            super().solve(verbose=False, solver=cp.MOSEK, **kwargs)
+            super().solve(verbose=False, solver=cp.SCS, **kwargs)
 
     def calculate_closed_form_solution_matrices(self) -> Optional[DPCClosedFormSolutionMatrices]:
         """

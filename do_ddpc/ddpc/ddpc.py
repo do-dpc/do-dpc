@@ -246,13 +246,16 @@ class DPC(ABC):
 
         logger.debug("Optimization problem has been built.")
 
-    def solve(self, verbose: bool = False, solver: str = cp.MOSEK, **kwargs):
+    def solve(self, verbose: bool = False, solver: str = cp.SCS, **kwargs):
         """
         Solves the optimization problem to calculate the optimal control input.
 
+        Recommended to use `SCS` as it does not require a license.
+        MOSEK should be used for better performance if a license is available.
+
         Args:
             verbose (bool): If True, solver output is displayed.
-            solver (str): Solver to use (default: MOSEK).
+            solver (str): Solver to use (default: SCS).
             **kwargs: Additional solver parameters.
 
         Raises:
@@ -281,9 +284,6 @@ class DPC(ABC):
                     "Ensure that `build_optimization_problem(self)` has been called before solving."
                 )
 
-            if solver is not cp.MOSEK:
-                logger.warning("Recommended to use MOSEK for performance. Currently using: %s", solver)
-
             self.problem.solve(solver=solver, verbose=verbose, **kwargs)
 
             if self.problem.status in ["infeasible", "unbounded"]:
@@ -302,10 +302,7 @@ class DPC(ABC):
                 raise RuntimeError(f"Optimization failed: Problem status is {self.problem.status}.")
 
             if self.problem.status in ["optimal_inaccurate"]:
-                # Verbose output of the solver
-                self.problem.solve(solver=solver, verbose=True, **kwargs)
-
-                raise RuntimeError("Optimization result is inaccurate.")
+                logger.warning("Optimization result is inaccurate.")
 
         except cp.error.SolverError as e:
             raise RuntimeError(f"Solver encountered an error: {str(e)}") from e
@@ -538,10 +535,10 @@ class DPC(ABC):
             raise ValueError(f"z_p_new must have shape ({self.dims.mp},), but got {z_p_new.shape}")
 
         # Shift past measurements to accommodate the latest data
-        self.z_p_cp.value[: (self.ddpc_params.tau_p - 1) * self.dims.mp] = self.z_p_cp.value[
+        self.z_p_cp.value[: (self.ddpc_params.tau_p - 1) * self.dims.mp] = self.z_p_cp.value[  # type: ignore
             self.dims.mp : self.dims.n_z_p
         ]
-        self.z_p_cp.value[(self.ddpc_params.tau_p - 1) * self.dims.mp : self.dims.n_z_p] = z_p_new
+        self.z_p_cp.value[(self.ddpc_params.tau_p - 1) * self.dims.mp : self.dims.n_z_p] = z_p_new  # type: ignore
 
         logger.debug("Past measurements updated.")
 
@@ -567,11 +564,11 @@ class DPC(ABC):
         for i in range(self.ddpc_params.tau_f):
             start_idx_y = self.dims.p * i
             end_idx_y = self.dims.p * (i + 1)
-            self.y_r_cp.value[start_idx_y:end_idx_y] = y_r_new
+            self.y_r_cp.value[start_idx_y:end_idx_y] = y_r_new  # type: ignore
 
             start_idx_u = self.dims.m * i
             end_idx_u = self.dims.m * (i + 1)
-            self.u_r_cp.value[start_idx_u:end_idx_u] = u_r_new
+            self.u_r_cp.value[start_idx_u:end_idx_u] = u_r_new  # type: ignore
 
         logger.debug("Tracking reference updated successfully.")
 

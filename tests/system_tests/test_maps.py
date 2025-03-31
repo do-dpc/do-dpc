@@ -5,6 +5,7 @@ With those maps, the parametrized test and be created.
 
 import numpy as np
 
+from do_ddpc.control_utils.control_structs import Bounds
 from do_ddpc.control_utils.lti_systems import (
     create_pre_stabilized_1D_double_integrator,
     create_1D_double_integrator,
@@ -13,9 +14,7 @@ from do_ddpc.control_utils.lti_systems import (
 )
 from do_ddpc.control_utils.pid_profiles import THREE_D_DOUBLE_INT_PID_COMBO, ONE_D_DOUBLE_INT_PID_COMBO
 from do_ddpc.ddpc.ddpc_structs import DPCParameters
-from do_ddpc.control_utils.control_structs import Bounds
 from do_ddpc.ddpc.gamma_ddpc import GammaDPC
-from do_ddpc.ddpc.mpc_nfour_sid import MPCNFourSID
 from do_ddpc.ddpc.mpc_oracle import MPCOracle
 from do_ddpc.ddpc.spc import SPC
 from do_ddpc.ddpc.tpc import TPC
@@ -30,7 +29,8 @@ SYSTEM_CREATOR = {
 }
 
 # Define controller classes
-CONTROLLERS = [TPC, SPC, GammaDPC, MPCOracle, MPCNFourSID]
+# MPCN4SID is for the moment removed as it made some problems with the SCS solver
+CONTROLLERS = [TPC, SPC, GammaDPC, MPCOracle]
 NOISE_RES_CONTROLLERS = [TPC, MPCOracle]
 
 # Define control parameters for different systems
@@ -59,9 +59,7 @@ CTRL_PARAMS = {
             R_delta_first=10 * np.eye(1),
         ),
     ],
-    "3D_double_integrator": [
-        DPCParameters(Q=np.diag([100, 1, 100, 1, 100, 1]), R=0.001 * np.eye(3), tau_p=3, tau_f=3)
-    ],
+    "3D_double_integrator": [DPCParameters(Q=np.diag([100, 1, 100, 1, 100, 1]), R=0.001 * np.eye(3), tau_p=3, tau_f=3)],
     "landau_benchmark": [DPCParameters(Q=np.diag([200]), R=0.001 * np.eye(1), tau_p=5, tau_f=20)],
 }
 

@@ -1,12 +1,12 @@
 pylint~=3.3.3
 pytest~=8.3.4
+pytest-cov~=6.0.0
 numpy~=1.26.4
 scipy~=1.15.1
 black~=25.1.0
 mypy~=1.15.0
 pre-commit~=4.1.0
 cvxpy~=1.6.0
-mosek~=10.2.15
 onnx>=1.13.0
 ipykernel~=6.29.5
 packaging~=24.2
