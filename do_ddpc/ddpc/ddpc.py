@@ -250,12 +250,12 @@ class DPC(ABC):
         """
         Solves the optimization problem to calculate the optimal control input.
 
-        Recommended to use `MOSEK`.
-        SCS solver used as it does not require a license
+        Recommended to use `SCS` as it does not require a license.
+        MOSEK should be used for better performance if a license is available.
 
         Args:
             verbose (bool): If True, solver output is displayed.
-            solver (str): Solver to use (default: OSQP).
+            solver (str): Solver to use (default: SCS).
             **kwargs: Additional solver parameters.
 
         Raises:
@@ -302,10 +302,7 @@ class DPC(ABC):
                 raise RuntimeError(f"Optimization failed: Problem status is {self.problem.status}.")
 
             if self.problem.status in ["optimal_inaccurate"]:
-                # Verbose output of the solver
-                self.problem.solve(solver=solver, verbose=True, **kwargs)
-
-                raise RuntimeError("Optimization result is inaccurate.")
+                logger.warning("Optimization result is inaccurate.")
 
         except cp.error.SolverError as e:
             raise RuntimeError(f"Solver encountered an error: {str(e)}") from e
