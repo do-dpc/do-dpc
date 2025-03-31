@@ -39,7 +39,7 @@ jobs:
       - name: Run tests with pytest
         run: |
           . venv/bin/activate
-          pytest --cov=do_dpc --cov-report=xml --cov-report=term
+          pytest --cov=do_ddpc --cov-report=xml --cov-report=term
           pytest -v
         continue-on-error: false
 
