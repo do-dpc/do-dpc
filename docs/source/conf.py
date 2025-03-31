@@ -53,7 +53,7 @@ html_title = "Do DPC"
 
 html_theme_options = {
     "path_to_docs": "docs",
-    "repository_url": "https://gitlab.ethz.ch/do-dpc/do-dpc",
+    "repository_url": "https://github.com/do-dpc/do-dpc/",
     "use_repository_button": True,
     "use_source_button": True,
     "use_issues_button": True,
