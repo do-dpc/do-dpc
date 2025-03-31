@@ -269,9 +269,9 @@ class DPC(ABC):
                 raise ValueError("Closed-form gains are unexpectedly None despite being marked as possible.")
 
             self.u_f = (
-                    self.cf_matrices.K_z_p @ self.z_p_cp.value
-                    + self.cf_matrices.K_u_r @ self.u_r_cp.value
-                    + self.cf_matrices.K_y_r @ self.y_r_cp.value
+                self.cf_matrices.K_z_p @ self.z_p_cp.value
+                + self.cf_matrices.K_u_r @ self.u_r_cp.value
+                + self.cf_matrices.K_y_r @ self.y_r_cp.value
             )
 
             self.control_step = 0
@@ -509,13 +509,13 @@ class DPC(ABC):
             )
 
         if self._is_closed_form_possible() or self.use_mpc_cf:
-            action = self.u_f[self.control_step * self.dims.m: (self.control_step + 1) * self.dims.m]
+            action = self.u_f[self.control_step * self.dims.m : (self.control_step + 1) * self.dims.m]
         else:
             if self.u_f_cp.value is None:
                 raise RuntimeError(
                     "Optimization problem not solved or solution is invalid. Ensure `solve()` runs successfully."
                 )
-            action = self.u_f_cp.value[self.control_step * self.dims.m: (self.control_step + 1) * self.dims.m]
+            action = self.u_f_cp.value[self.control_step * self.dims.m : (self.control_step + 1) * self.dims.m]
 
         self.control_step += 1
 
@@ -536,9 +536,9 @@ class DPC(ABC):
 
         # Shift past measurements to accommodate the latest data
         self.z_p_cp.value[: (self.ddpc_params.tau_p - 1) * self.dims.mp] = self.z_p_cp.value[  # type: ignore
-                                                                           self.dims.mp: self.dims.n_z_p
-                                                                           ]
-        self.z_p_cp.value[(self.ddpc_params.tau_p - 1) * self.dims.mp: self.dims.n_z_p] = z_p_new  # type: ignore
+            self.dims.mp : self.dims.n_z_p
+        ]
+        self.z_p_cp.value[(self.ddpc_params.tau_p - 1) * self.dims.mp : self.dims.n_z_p] = z_p_new  # type: ignore
 
         logger.debug("Past measurements updated.")
 
@@ -602,19 +602,19 @@ class DPC(ABC):
         # Constructing past Hankel matrix
         Z_p = np.zeros((mp * tau_p, n_col))
         for i in range(tau_p):
-            Z_p[i * mp: (i + 1) * mp, :] = z[:, i: i + n_col]
+            Z_p[i * mp : (i + 1) * mp, :] = z[:, i : i + n_col]
 
         # Constructing future Hankel matrices
         Y_f = np.zeros((p * tau_f, n_col))
         U_f = np.zeros((m * tau_f, n_col))
         for i in range(tau_p, tau_f + tau_p):
-            Y_f[p * (i - tau_p): p * (1 + i - tau_p), :] = y[:, i: i + n_col]
-            U_f[m * (i - tau_p): m * (1 + i - tau_p), :] = u[:, i: i + n_col]
+            Y_f[p * (i - tau_p) : p * (1 + i - tau_p), :] = y[:, i : i + n_col]
+            U_f[m * (i - tau_p) : m * (1 + i - tau_p), :] = u[:, i : i + n_col]
 
         # Constructing complete interleaved Hankel matrix
         Z = np.zeros((mp * (tau_p + tau_f), n_col))
         for i in range(tau_p + tau_f):
-            Z[i * mp: (i + 1) * mp, :] = z[:, i: i + n_col]
+            Z[i * mp : (i + 1) * mp, :] = z[:, i : i + n_col]
 
         # Normalize matrices
         sqrt_n_col = sqrt(n_col)
@@ -683,7 +683,7 @@ class DPC(ABC):
         S_2 = np.zeros((self.dims.m, self.dims.n_z_p))
 
         S_1[:, : self.dims.m] = np.eye(self.dims.m)  # First m columns of S1 are identity
-        S_2[:, -self.dims.m:] = np.eye(self.dims.m)  # Last m columns of S2 are identity
+        S_2[:, -self.dims.m :] = np.eye(self.dims.m)  # Last m columns of S2 are identity
 
         return S_1, S_2
 

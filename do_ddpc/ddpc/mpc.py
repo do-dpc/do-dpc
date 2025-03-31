@@ -230,8 +230,8 @@ class MPC(DPC, ABC):
                Otherwise, it solves the optimization problem as implemented in the DPC class.
 
         """
-        u = self.z_p_cp.value[-self.dims.m :] # type: ignore
-        y = self.z_p_cp.value[-self.dims.mp : -self.dims.m] # type: ignore
+        u = self.z_p_cp.value[-self.dims.m :]  # type: ignore
+        y = self.z_p_cp.value[-self.dims.mp : -self.dims.m]  # type: ignore
 
         # Update state with Kalman Filter
         self.x_cp.value = self.sys_matrices.sys.A @ self.x_cp.value + self.sys_matrices.sys.B @ u  # type: ignore
