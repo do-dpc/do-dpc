@@ -17,8 +17,8 @@ jobs:
 
       - name: Set up MOSEK license
         run: |
-          mkdir -p ~/.mosek
-          echo "${{ secrets.MOSEK_LICENSE }}" > ~/.mosek/mosek.lic
+          mkdir -p ~/mosek
+          echo "${{ secrets.MOSEK_LICENSE }}" > ~/mosek/mosek.lic
 
       - name: Set up Python
         uses: actions/setup-python@v4
