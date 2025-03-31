@@ -21,7 +21,7 @@ jobs:
           python-version: 3.x
 
       - name: Cache pip dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             ~/.cache/pip
@@ -45,7 +45,7 @@ jobs:
 
       - name: Upload coverage results
         if: success()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-report
           path: coverage.xml
