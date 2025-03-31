@@ -1,17 +1,16 @@
 # Do DPC
 
-![Pipeline Status](https://gitlab.ethz.ch/do-ddpc/do-ddpc/badges/main/pipeline.svg)
-![Coverage](https://gitlab.ethz.ch/do-ddpc/do-ddpc/badges/main/coverage.svg)
-[![Documentation Status](https://readthedocs.org/projects/do-ddpc/badge/?version=latest)](https://do-ddpc.readthedocs.io/en/latest/?badge=latest)
+![Pipeline Status](https://github.com/do-dpc/do-dpc/actions/workflows/ci.yml/badge.svg)
+[![Documentation Status](https://readthedocs.org/projects/do-dpc/badge/?version=latest)](https://do-dpc.readthedocs.io/en/latest/?badge=latest)
 
 The purpose of this code is to provide a Framework for Data-Driven Predictive Control (DPC) with illustrative examples.
 
-Please visit the extensive [documentation](https://do-ddpc.readthedocs.io/en/latest/), kindly hosted on `readthedocs`.
+Please visit the extensive [documentation](https://do-dpc.readthedocs.io/en/latest/), kindly hosted on `readthedocs`.
 
-## Citing do-ddpc
+## Citing do-dpc
 
-Please follow the [instructions](https://do-ddpc.readthedocs.io/en/latest/getting_started/credit.html)
-if you want to use **do-ddpc** for published work.
+Please follow the [instructions](https://do-dpc.readthedocs.io/en/latest/getting_started/credit.html)
+if you want to use **do-dpc** for published work.
 
 ## Getting Started
 
@@ -75,19 +74,19 @@ http://localhost:8000
 The code contains the following files and folders:
 
 ```
-do-ddpc/
-├── do_ddpc/                      # Core Python source code for the DPC library
+do-dpc/
+├── do_dpc/                      # Core Python source code for the DPC library
 │   ├── control_utils/            # Utilities for control systems (PID, noise generators, etc.)
-│   ├── ddpc/                     # Core DPC algorithms and implementations
-│   │   ├── ddpc.py               # Main DPC implementation
-│   │   ├── ddpc_structs.py       # Data structures for DPC
+│   ├── dpc/                     # Core DPC algorithms and implementations
+│   │   ├── dpc.py               # Main DPC implementation
+│   │   ├── dpc_structs.py       # Data structures for DPC
 │   ├── utils/                    # General utility modules (logging, path management, etc.)
 ├── docs/                         # Documentation files (Sphinx)
 │   ├── build/                    # Build artifacts for generated documentation
 │   ├── source/                   # Source files for documentation
 │   │   ├── _static/              # Static assets (images, CSS, etc.)
 │   │   ├── _templates/           # Templates for documentation structure
-│   │   ├── ddpc_methods/         # Documentation for different DPC methods
+│   │   ├── dpc_methods/         # Documentation for different DPC methods
 │   │   ├── getting_started/      # Guides and introductory documentation
 │   │   ├── conf.py               # Sphinx configuration file
 │   │   ├── index.rst             # Main entry point for documentation

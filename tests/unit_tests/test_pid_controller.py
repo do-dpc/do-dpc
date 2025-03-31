@@ -5,7 +5,7 @@ Tests for the PID controller and MIMO PID controller
 import numpy as np
 import pytest
 
-from do_ddpc.control_utils.pid import PIDController, PIDGains, MIMOPIDController
+from do_dpc.control_utils.pid import PIDController, PIDGains, MIMOPIDController
 
 
 def test_pid_initialization():

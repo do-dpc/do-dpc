@@ -14,15 +14,15 @@ from typing import Optional
 import numpy as np
 import pytest
 
-from do_ddpc.control_utils.lti_systems import (
+from do_dpc.control_utils.lti_systems import (
     create_pre_stabilized_1D_double_integrator,
     create_1D_double_integrator,
     LTISimulator,
 )
-from do_ddpc.control_utils.pid_control_utils import PIDCombo
-from do_ddpc.ddpc.ddpc_structs import DPCParameters
-from do_ddpc.control_utils.control_structs import Bounds
-from do_ddpc.ddpc.deepc import DeePCSpecificParameters, DeePC
+from do_dpc.control_utils.pid_control_utils import PIDCombo
+from do_dpc.dpc.dpc_structs import DPCParameters
+from do_dpc.control_utils.control_structs import Bounds
+from do_dpc.dpc.deepc import DeePCSpecificParameters, DeePC
 from tests.system_tests.test_maps import PID_COMBO_CONFIG
 from tests.system_tests.util_functions import collect_trajectory_data, run_simulation
 

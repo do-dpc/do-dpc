@@ -5,7 +5,7 @@ Unit tests for control input generation and trajectory data collection.
 import numpy as np
 import pytest
 
-from do_ddpc.control_utils.control_structs import InputOutputTrajectory
+from do_dpc.control_utils.control_structs import InputOutputTrajectory
 
 
 @pytest.mark.parametrize("white_noise_generator", [{"m": 2}], indirect=True)

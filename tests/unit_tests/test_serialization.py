@@ -11,7 +11,7 @@ from dataclasses import dataclass
 import numpy as np
 import pytest
 
-from do_ddpc.utils.serialization import save_dataclass_npz, load_dataclass_npz
+from do_dpc.utils.serialization import save_dataclass_npz, load_dataclass_npz
 from tests.fixtures.utils_fixtures import ExampleData
 
 

@@ -7,15 +7,15 @@ from typing import Optional, Type
 
 import numpy as np
 
-from do_ddpc.control_utils.control_structs import Bounds
-from do_ddpc.control_utils.lti_systems import LTISimulator
-from do_ddpc.control_utils.pid_control_utils import PIDCombo
-from do_ddpc.control_utils.trajectory_collector import collect_trajectory_data
-from do_ddpc.ddpc.ddpc import DPC
-from do_ddpc.ddpc.ddpc_structs import DPCParameters
-from do_ddpc.ddpc.mpc import MPCSystemMatrices
-from do_ddpc.ddpc.mpc_nfour_sid import MPCNFourSID
-from do_ddpc.ddpc.mpc_oracle import MPCOracle
+from do_dpc.control_utils.control_structs import Bounds
+from do_dpc.control_utils.lti_systems import LTISimulator
+from do_dpc.control_utils.pid_control_utils import PIDCombo
+from do_dpc.control_utils.trajectory_collector import collect_trajectory_data
+from do_dpc.dpc.dpc import DPC
+from do_dpc.dpc.dpc_structs import DPCParameters
+from do_dpc.dpc.mpc import MPCSystemMatrices
+from do_dpc.dpc.mpc_nfour_sid import MPCNFourSID
+from do_dpc.dpc.mpc_oracle import MPCOracle
 
 # Simulation Parameters
 N_SAMPLES = 1000
@@ -69,7 +69,7 @@ def run_simulation(
 def create_and_test_controller(
     system: LTISimulator,
     controller_cls: Type[DPC],
-    ddpc_params: DPCParameters,
+    dpc_params: DPCParameters,
     n_block_rows: int,
     target: np.ndarray,
     u_bounds: Optional[Bounds] = None,
@@ -82,7 +82,7 @@ def create_and_test_controller(
     Args:
         system (LTISimulator): The system to control.
         controller_cls (Type): The predictive controller class.
-        ddpc_params (DPCParameters): Control parameters
+        dpc_params (DPCParameters): Control parameters
         n_block_rows (int): Needed for n4sid.
         target (np.ndarray): Target for the output reference.
         u_bounds (Bounds, optional): Input constraints.
@@ -97,12 +97,12 @@ def create_and_test_controller(
 
     if controller_cls is MPCOracle:
         sys_data = MPCSystemMatrices(K=system.calculate_inf_hor_Kalman_gain_K(), sys=system.sys)
-        controller = controller_cls(ddpc_params, n_state=system.x.shape[0], sys_data=sys_data)  # type: ignore
+        controller = controller_cls(dpc_params, n_state=system.x.shape[0], sys_data=sys_data)  # type: ignore
         controller.set_state_x(x_new=system.x_0)
     elif controller_cls is MPCNFourSID:
-        controller = controller_cls(ddpc_params, training_data, n_block_rows=n_block_rows)
+        controller = controller_cls(dpc_params, training_data, n_block_rows=n_block_rows)
     else:
-        controller = controller_cls(ddpc_params, training_data)
+        controller = controller_cls(dpc_params, training_data)
 
     if u_bounds:
         controller.add_input_constraints(u_bounds)

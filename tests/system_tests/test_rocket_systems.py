@@ -5,17 +5,17 @@ Tests for the Rocket specific environment
 import numpy as np
 import pytest
 
-from do_ddpc.ddpc.gamma_ddpc import GammaDPC
-from do_ddpc.ddpc.mpc import MPCSystemMatrices
-from do_ddpc.ddpc.mpc_oracle import MPCOracle
-from do_ddpc.ddpc.spc import SPC
-from do_ddpc.ddpc.tpc import TPC
-from do_ddpc.environments.rocket_env.rocket_controller_profiles import CTRL_PARAMS_ROCKET
-from do_ddpc.environments.rocket_env.rocket_data_collection import collect_trajectory_data_env
-from do_ddpc.environments.rocket_env.rocket_env_facade import RocketEnvFacade, RocketEnvironmentArguments
-from do_ddpc.environments.rocket_env.rocket_utils import calculate_normalized_thrust_to_hover
+from do_dpc.dpc.gamma_ddpc import GammaDDPC
+from do_dpc.dpc.mpc import MPCSystemMatrices
+from do_dpc.dpc.mpc_oracle import MPCOracle
+from do_dpc.dpc.spc import SPC
+from do_dpc.dpc.tpc import TPC
+from do_dpc.environments.rocket_env.rocket_controller_profiles import CTRL_PARAMS_ROCKET
+from do_dpc.environments.rocket_env.rocket_data_collection import collect_trajectory_data_env
+from do_dpc.environments.rocket_env.rocket_env_facade import RocketEnvFacade, RocketEnvironmentArguments
+from do_dpc.environments.rocket_env.rocket_utils import calculate_normalized_thrust_to_hover
 
-WORKING_CTRL = [TPC, SPC, GammaDPC, MPCOracle]
+WORKING_CTRL = [TPC, SPC, GammaDDPC, MPCOracle]
 
 
 @pytest.fixture(scope="module")

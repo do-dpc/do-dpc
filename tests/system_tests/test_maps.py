@@ -5,19 +5,19 @@ With those maps, the parametrized test and be created.
 
 import numpy as np
 
-from do_ddpc.control_utils.control_structs import Bounds
-from do_ddpc.control_utils.lti_systems import (
+from do_dpc.control_utils.control_structs import Bounds
+from do_dpc.control_utils.lti_systems import (
     create_pre_stabilized_1D_double_integrator,
     create_1D_double_integrator,
     create_3D_double_integrator,
     create_landau_benchmark,
 )
-from do_ddpc.control_utils.pid_profiles import THREE_D_DOUBLE_INT_PID_COMBO, ONE_D_DOUBLE_INT_PID_COMBO
-from do_ddpc.ddpc.ddpc_structs import DPCParameters
-from do_ddpc.ddpc.gamma_ddpc import GammaDPC
-from do_ddpc.ddpc.mpc_oracle import MPCOracle
-from do_ddpc.ddpc.spc import SPC
-from do_ddpc.ddpc.tpc import TPC
+from do_dpc.control_utils.pid_profiles import THREE_D_DOUBLE_INT_PID_COMBO, ONE_D_DOUBLE_INT_PID_COMBO
+from do_dpc.dpc.dpc_structs import DPCParameters
+from do_dpc.dpc.gamma_ddpc import GammaDDPC
+from do_dpc.dpc.mpc_oracle import MPCOracle
+from do_dpc.dpc.spc import SPC
+from do_dpc.dpc.tpc import TPC
 
 SYSTEMS = ["pre_stabilized_1D_double_integrator", "1D_double_integrator", "3D_double_integrator", "landau_benchmark"]
 
@@ -30,7 +30,7 @@ SYSTEM_CREATOR = {
 
 # Define controller classes
 # MPCN4SID is for the moment removed as it made some problems with the SCS solver
-CONTROLLERS = [TPC, SPC, GammaDPC, MPCOracle]
+CONTROLLERS = [TPC, SPC, GammaDDPC, MPCOracle]
 NOISE_RES_CONTROLLERS = [TPC, MPCOracle]
 
 # Define control parameters for different systems

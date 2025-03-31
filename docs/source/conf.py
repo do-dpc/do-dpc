@@ -12,7 +12,7 @@ sys.path.append(os.path.abspath(os.path.join(".")))
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "do-ddpc"
+project = "do-dpc"
 copyright = "2025, Sebastian Graf"
 author = "Sebastian Graf"
 release = "0.1.0"
@@ -53,7 +53,7 @@ html_title = "Do DPC"
 
 html_theme_options = {
     "path_to_docs": "docs",
-    "repository_url": "https://gitlab.ethz.ch/do-ddpc/do-ddpc",
+    "repository_url": "https://gitlab.ethz.ch/do-dpc/do-dpc",
     "use_repository_button": True,
     "use_source_button": True,
     "use_issues_button": True,

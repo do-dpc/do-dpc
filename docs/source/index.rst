@@ -28,22 +28,22 @@ Table of Content
    :caption: Code Reference
 
    /code_ref/code_architecture
-   /code_ref/ddpc_structure
+   /code_ref/dpc_structure
    /code_ref/implementation_pipeline
    /code_ref/glossary
-   API Reference <api/do_ddpc>
+   API Reference <api/do_dpc>
 
 
 .. toctree::
    :maxdepth: 2
    :caption: DPC Methods
 
-   /ddpc_methods/ddpc
-   /ddpc_methods/tpc
-   /ddpc_methods/spc
-   /ddpc_methods/gamma_ddpc
-   /ddpc_methods/deepc
-   /ddpc_methods/mpc
+   /dpc_methods/dpc
+   /dpc_methods/tpc
+   /dpc_methods/spc
+   /dpc_methods/gamma_ddpc
+   /dpc_methods/deepc
+   /dpc_methods/mpc
 
 .. toctree::
    :maxdepth: 2
