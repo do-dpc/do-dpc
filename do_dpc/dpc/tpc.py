@@ -291,9 +291,7 @@ class TPC(DPC):
         """
 
         indy = (
-            np.array(
-                [np.arange(1, self.dims.p + 1) + self.dims.mp * i for i in range(self.dpc_params.tau_f)]
-            ).flatten()
+            np.array([np.arange(1, self.dims.p + 1) + self.dims.mp * i for i in range(self.dpc_params.tau_f)]).flatten()
             - 1
         )
         return L[np.ix_(self.dims.n_z_p + indy, self.dims.n_z_p + indy)]
