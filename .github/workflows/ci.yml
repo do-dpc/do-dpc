@@ -15,12 +15,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Decode Mosek License
-        run: echo "${{ secrets.MOSEK_LICENSE_B64 }}" | base64 --decode > mosek.lic
-
-      - name: Move License to the Right Location
-        run: mkdir -p ~/.mosek && mv mosek.lic ~/.mosek/mosek.lic
-
       - name: Set up Python
         uses: actions/setup-python@v4
         with:

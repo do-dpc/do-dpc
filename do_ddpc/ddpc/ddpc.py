@@ -246,13 +246,13 @@ class DPC(ABC):
 
         logger.debug("Optimization problem has been built.")
 
-    def solve(self, verbose: bool = False, solver: str = cp.MOSEK, **kwargs):
+    def solve(self, verbose: bool = False, solver: str = cp.OSQP, **kwargs):
         """
         Solves the optimization problem to calculate the optimal control input.
 
         Args:
             verbose (bool): If True, solver output is displayed.
-            solver (str): Solver to use (default: MOSEK).
+            solver (str): Solver to use (default: OSQP).
             **kwargs: Additional solver parameters.
 
         Raises:

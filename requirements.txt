@@ -8,6 +8,7 @@ mypy~=1.15.0
 pre-commit~=4.1.0
 cvxpy~=1.6.0
 mosek~=10.2.15
+osqp~=0.6.7.post3
 onnx>=1.13.0
 ipykernel~=6.29.5
 packaging~=24.2
