@@ -219,7 +219,7 @@ class MPC(DPC, ABC):
 
         self.x_cp.value = x_new
 
-    def solve(self, verbose: bool = False, solver: str = cp.MOSEK, **kwargs):
+    def solve(self, verbose: bool = False, solver: str = cp.SCS, **kwargs):
         """
         Solves the optimization problem for the MPC controller.
 
@@ -251,7 +251,7 @@ class MPC(DPC, ABC):
             self.control_step = 0
         else:
             # For constrained problem, solve the built optimization problem
-            super().solve(verbose=False, solver=cp.MOSEK, **kwargs)
+            super().solve(verbose=False, solver=cp.SCS, **kwargs)
 
     def calculate_closed_form_solution_matrices(self) -> Optional[DPCClosedFormSolutionMatrices]:
         """
