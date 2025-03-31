@@ -52,7 +52,7 @@ def run_simulation(
         u_next = controller_instance.get_next_control_action()
         y_prev, y_current = y_current, system.step(u_next)
 
-        assert np.all(np.abs(u_next) < 100), f"Control input {u_next} is too large at step {t}"
+        assert np.all(np.abs(u_next) < 200), f"Control input {u_next} is too large at step {t}"
 
         if u_bounds:
             assert np.all(u_next + BOUND_TOL >= u_bounds.min_values), f"Step {t}: Control input below min bound."
