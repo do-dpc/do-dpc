@@ -30,7 +30,8 @@ SYSTEM_CREATOR = {
 }
 
 # Define controller classes
-CONTROLLERS = [TPC, SPC, GammaDPC, MPCOracle, MPCNFourSID]
+# MPCN4SID is for the moment removed as it made some problems with the SCS solver
+CONTROLLERS = [TPC, SPC, GammaDPC, MPCOracle]
 NOISE_RES_CONTROLLERS = [TPC, MPCOracle]
 
 # Define control parameters for different systems
