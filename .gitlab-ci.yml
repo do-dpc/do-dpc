@@ -1,0 +1,49 @@
+stages:
+  - test
+
+cache:
+  paths:
+    - .cache/pip
+    - venv/
+
+before_script:
+  - pip install -r requirements.txt
+
+pytest:
+  stage: test
+  script:
+    - pytest --cov=do_ddpc --cov-report=xml --cov-report=term
+    - pytest -v
+  coverage: '/TOTAL.*\s+(\d+\%)$/'
+  artifacts:
+    paths:
+      - coverage.xml
+  only:
+    - merge_requests
+    - main
+
+pylint:
+  stage: test
+  script:
+    - pylint tests/ --rcfile=.pylintrc
+    - pylint do_ddpc/ --rcfile=.pylintrc
+  only:
+    - merge_requests
+    - main
+
+mypy:
+  stage: test
+  script:
+    - mypy do_ddpc/
+    - mypy tests/
+  only:
+    - merge_requests
+    - main
+
+black:
+  stage: test
+  script:
+    - black --check --line-length=120 .
+  only:
+    - merge_requests
+    - main

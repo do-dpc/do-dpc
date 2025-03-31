@@ -1,0 +1,8 @@
+[MASTER]
+fail-under=10.0
+
+[MESSAGES CONTROL]
+disable=invalid-name
+
+[FORMAT]
+max-line-length=120

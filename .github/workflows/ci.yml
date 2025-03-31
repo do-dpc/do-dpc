@@ -1,0 +1,68 @@
+name: CI Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Cache pip dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cache/pip
+            venv/
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: |
+          python -m venv venv
+          . venv/bin/activate
+          pip install -r requirements.txt
+
+      - name: Run tests with pytest
+        run: |
+          . venv/bin/activate
+          pytest --cov=do_ddpc --cov-report=xml --cov-report=term
+          pytest -v
+        continue-on-error: false
+
+      - name: Upload coverage results
+        if: success()
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage-report
+          path: coverage.xml
+
+      - name: Run pylint
+        run: |
+          . venv/bin/activate
+          pylint tests/ --rcfile=.pylintrc
+          pylint do_ddpc/ --rcfile=.pylintrc
+
+      - name: Run mypy
+        run: |
+          . venv/bin/activate
+          mypy do_ddpc/
+          mypy tests/
+
+      - name: Run black check
+        run: |
+          . venv/bin/activate
+          black --check --line-length=120 .
