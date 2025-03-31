@@ -4,7 +4,7 @@ Unit tests for logging configuration.
 
 import logging
 
-from do_ddpc.utils.logging_config import get_logger, setup_logging
+from do_dpc.utils.logging_config import get_logger, setup_logging
 
 
 def test_get_logger():

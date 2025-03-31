@@ -39,7 +39,7 @@ jobs:
       - name: Run tests with pytest
         run: |
           . venv/bin/activate
-          pytest --cov=do_ddpc --cov-report=xml --cov-report=term
+          pytest --cov=do_dpc --cov-report=xml --cov-report=term
         continue-on-error: false
 
       - name: Upload coverage results
@@ -53,12 +53,12 @@ jobs:
         run: |
           . venv/bin/activate
           pylint tests/ --rcfile=.pylintrc
-          pylint do_ddpc/ --rcfile=.pylintrc
+          pylint do_dpc/ --rcfile=.pylintrc
 
       - name: Run mypy
         run: |
           . venv/bin/activate
-          mypy do_ddpc/
+          mypy do_dpc/
           mypy tests/
 
       - name: Run black check

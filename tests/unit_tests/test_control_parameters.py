@@ -8,7 +8,7 @@ matrix validation, positive (semi)definiteness checks, and block-diagonal constr
 import numpy as np
 import pytest
 
-from do_ddpc.ddpc.ddpc_structs import DPCParameters
+from do_dpc.dpc.dpc_structs import DPCParameters
 
 
 def create_positive_definite_matrix(size: int) -> np.ndarray:

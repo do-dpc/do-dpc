@@ -3,4 +3,4 @@
     :template: module.rst
     :recursive:
 
-    do_ddpc
+    do_dpc

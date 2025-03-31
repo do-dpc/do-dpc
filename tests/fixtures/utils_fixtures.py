@@ -9,10 +9,10 @@ from dataclasses import dataclass
 import numpy as np
 import pytest
 
-from do_ddpc.control_utils.lti_systems import create_1D_double_integrator
-from do_ddpc.control_utils.noise_generators import WhiteNoiseGenerator
-from do_ddpc.control_utils.trajectory_collector import TrajectoryCollector
-from do_ddpc.utils.path_manager import PathManager
+from do_dpc.control_utils.lti_systems import create_1D_double_integrator
+from do_dpc.control_utils.noise_generators import WhiteNoiseGenerator
+from do_dpc.control_utils.trajectory_collector import TrajectoryCollector
+from do_dpc.utils.path_manager import PathManager
 
 
 @pytest.fixture

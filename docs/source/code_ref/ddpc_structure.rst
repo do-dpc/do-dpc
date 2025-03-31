@@ -21,14 +21,14 @@ DPC Class
 Arguments
 ---------
 
-- ddpc_parameters (DPCParameters)
+- dpc_parameters (DPCParameters)
 - training_data (InputOutputTrajectory)
 
 Attributes
 ----------
 
-- ddpc_params
-- ddpc_dims
+- dpc_params
+- dpc_dims
 
 Matrices:
 

@@ -5,7 +5,7 @@ Tests for the WhiteNoiseGenerator class.
 import pytest
 import numpy as np
 
-from do_ddpc.control_utils.noise_generators import WhiteNoiseGenerator
+from do_dpc.control_utils.noise_generators import WhiteNoiseGenerator
 
 
 def test_white_noise_initialization():

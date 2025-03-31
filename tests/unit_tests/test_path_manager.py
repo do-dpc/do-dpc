@@ -5,7 +5,7 @@ Tests ensure that log and data paths are correctly formatted
 and that necessary directories are created.
 """
 
-from do_ddpc.utils.path_manager import get_path_manager
+from do_dpc.utils.path_manager import get_path_manager
 
 
 def test_directories_created(path_manager):

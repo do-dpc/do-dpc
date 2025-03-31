@@ -5,15 +5,15 @@ This module tests the basic functionality of the DPC library.
 import numpy as np
 import pytest
 
-from do_ddpc.control_utils.lti_systems import (
+from do_dpc.control_utils.lti_systems import (
     create_pre_stabilized_1D_double_integrator,
     LTISimulator,
 )
-from do_ddpc.control_utils.noise_generators import WhiteNoiseGenerator
-from do_ddpc.control_utils.trajectory_collector import TrajectoryCollector
-from do_ddpc.ddpc.ddpc_structs import DPCParameters
-from do_ddpc.control_utils.control_structs import InputOutputTrajectory
-from do_ddpc.ddpc.tpc import TPC
+from do_dpc.control_utils.noise_generators import WhiteNoiseGenerator
+from do_dpc.control_utils.trajectory_collector import TrajectoryCollector
+from do_dpc.dpc.dpc_structs import DPCParameters
+from do_dpc.control_utils.control_structs import InputOutputTrajectory
+from do_dpc.dpc.tpc import TPC
 from tests.system_tests.util_functions import collect_trajectory_data, run_simulation, BOUND_TOL
 
 CTRL_BASIC = DPCParameters(Q=np.diag([100, 1]), R=0.001 * np.eye(1), tau_p=3, tau_f=3)

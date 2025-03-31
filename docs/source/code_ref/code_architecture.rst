@@ -32,15 +32,15 @@ Folder Structure
 
    * - Directory
      - Description
-   * - ``do-ddpc``
+   * - ``do-dpc``
      - Main package.
-   * - ``do-ddpc/controlutils``
+   * - ``do-dpc/controlutils``
      - Control-related utilities.
-   * - ``do-ddpc/ddpc``
+   * - ``do-dpc/dpc``
      - Core functionality.
-   * - ``do-ddpc/environments``
+   * - ``do-dpc/environments``
      - Environment configurations.
-   * - ``do-ddpc/utils``
+   * - ``do-dpc/utils``
      - General utilities.
    * - ``docs``
      - Project documentation.

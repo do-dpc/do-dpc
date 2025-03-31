@@ -8,8 +8,8 @@ state initialization, step updates, noise handling, and input validation.
 import numpy as np
 import pytest
 
-from do_ddpc.control_utils.lti_systems import StateSpaceModel, LTISimulator
-from do_ddpc.control_utils.noise_generators import WhiteNoiseGenerator
+from do_dpc.control_utils.lti_systems import StateSpaceModel, LTISimulator
+from do_dpc.control_utils.noise_generators import WhiteNoiseGenerator
 
 
 def test_initial_state(double_integrator):

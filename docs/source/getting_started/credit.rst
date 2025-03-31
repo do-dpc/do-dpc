@@ -1,6 +1,6 @@
 Credit
 ======
-The developers of **do-ddpc** own credit to CVXPY_ which run at the core of the DPC package.
+The developers of **do-dpc** own credit to CVXPY_ which run at the core of the DPC package.
 
 .. _CVXPY: https://www.cvxpy.org/
 
@@ -12,7 +12,7 @@ Code for the `n4sid` is based on the software package from spmvg_.
 
 .. _spmvg: https://github.com/spmvg/nfoursid
 
-If you use **do-ddpc** for published work please cite the corresponding papers:
+If you use **do-dpc** for published work please cite the corresponding papers:
 
 - `CVXPY: A Python-Embedded Modeling Language for Convex Optimization <https://arxiv.org/abs/1603.00943>`_
 
