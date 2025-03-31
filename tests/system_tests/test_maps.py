@@ -59,9 +59,7 @@ CTRL_PARAMS = {
             R_delta_first=10 * np.eye(1),
         ),
     ],
-    "3D_double_integrator": [
-        DPCParameters(Q=np.diag([100, 1, 100, 1, 100, 1]), R=0.001 * np.eye(3), tau_p=3, tau_f=3)
-    ],
+    "3D_double_integrator": [DPCParameters(Q=np.diag([100, 1, 100, 1, 100, 1]), R=0.001 * np.eye(3), tau_p=3, tau_f=3)],
     "landau_benchmark": [DPCParameters(Q=np.diag([200]), R=0.001 * np.eye(1), tau_p=5, tau_f=20)],
 }
 

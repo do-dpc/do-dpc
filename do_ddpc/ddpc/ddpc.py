@@ -535,7 +535,7 @@ class DPC(ABC):
             raise ValueError(f"z_p_new must have shape ({self.dims.mp},), but got {z_p_new.shape}")
 
         # Shift past measurements to accommodate the latest data
-        self.z_p_cp.value[: (self.ddpc_params.tau_p - 1) * self.dims.mp] = self.z_p_cp.value[
+        self.z_p_cp.value[: (self.ddpc_params.tau_p - 1) * self.dims.mp] = self.z_p_cp.value[ # type: ignore
             self.dims.mp : self.dims.n_z_p
         ]
         self.z_p_cp.value[(self.ddpc_params.tau_p - 1) * self.dims.mp : self.dims.n_z_p] = z_p_new
