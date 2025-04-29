@@ -2,6 +2,7 @@
 
 ![Pipeline Status](https://github.com/do-dpc/do-dpc/actions/workflows/ci.yml/badge.svg)
 [![Documentation Status](https://readthedocs.org/projects/do-dpc/badge/?version=latest)](https://do-dpc.readthedocs.io/en/latest/?badge=latest)
+[![PyPI](https://img.shields.io/pypi/v/do-dpc.svg)](https://pypi.org/project/do-dpc/)
 
 The purpose of this code is to provide a Framework for Data-Driven Predictive Control (DPC) with illustrative examples.
 
