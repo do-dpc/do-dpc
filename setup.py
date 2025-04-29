@@ -1,5 +1,9 @@
 from setuptools import setup, find_packages
 
+def load_requirements(filename="requirements.txt"):
+    with open(filename, "r") as f:
+        return f.read().splitlines()
+
 setup(
     name="do-dpc",
     version="1.0.0",
