@@ -149,6 +149,8 @@ class DeePC(DPC):
         self.specific_params = DeePCSpecificParameters(suppress_warnings=True)
         self.specific_params_set = False
 
+        self.reg_matrices: DeePCRegularizationMatrices
+
         super().__init__(dpc_params, training_data)
 
         # Additional slack variables
