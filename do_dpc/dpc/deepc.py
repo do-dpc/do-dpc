@@ -198,10 +198,10 @@ class DeePC(DPC):
 
         return cost
 
-    def get_predictor_constraint_expression(self) -> cp.constraints.Constraint:
+    def get_predictor_constraint_expression(self) -> cp.Constraint:
         """
         Returns:
-            cp.constraints.Constrains: CVXPY constraints for u_f and y_f depending on the Hankel matrices and `g`.
+            cp.Constraint: CVXPY constraints for u_f and y_f depending on the Hankel matrices and `g`.
         """
 
         # Equality constraints for past horizon
@@ -228,14 +228,10 @@ class DeePC(DPC):
             Optional[DPCClosedFormSolutionMatrices]: The computed gain matrices if conditions are met; otherwise, None.
 
         Conditions:
-            - If `tunable_parameters` is missing, return None.
             - If `lambda_g_1` is nonzero, return None (1-norm differentiation issue).
             - If `lambda_sigma` is infinite, return None.
             - If `lambda_p` is zero, return None.
         """
-        if not hasattr(self, "tunable_parameters"):
-            return None
-
         if self.specific_params.lambda_g_1 != 0:
             return None
 
@@ -254,7 +250,7 @@ class DeePC(DPC):
         R_h = self.dpc_params.R_horizon
 
         T_1 = Y_f.T @ Q_h @ Y_f + U_f.T @ R_h @ U_f
-        T_2 = self.specific_params.lambda_g_2 + self.specific_params.lambda_p * I_minus_Pi.T @ I_minus_Pi
+        T_2 = self.specific_params.lambda_g_2 * np.eye(self.hankel_matrices.n_col) + self.specific_params.lambda_p * I_minus_Pi.T @ I_minus_Pi
         T_3 = self.specific_params.lambda_sigma * Z_p.T @ Z_p
 
         F_1 = U_f @ pinv(T_1 + T_2 + T_3)
@@ -272,7 +268,7 @@ class DeePC(DPC):
             The closed-form data will be recalculated as the matrices depend on lambda_.
 
         Args:
-            specific_params: DeePCTunableParameters
+            specific_params: DeePCSpecificParameters
         """
         self.specific_params_set = True
         self.specific_params = specific_params
@@ -282,11 +278,11 @@ class DeePC(DPC):
     def build_optimization_problem(self):
         """
         Raises:
-            Warning: If tunable parameters have not been explicitly set using set_tunable_parameters().
+            Warning: If tunable parameters have not been explicitly set using set_specific_parameters().
         """
         if not self.specific_params_set:
             logger.warning(
-                "Tunable parameters have not been explicitly set using set_tunable_parameters(). "
+                "Tunable parameters have not been explicitly set using set_specific_parameters(). "
                 "Default values are being used, which may lead to unexpected behavior."
             )
 

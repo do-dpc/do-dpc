@@ -83,7 +83,7 @@ class SPC(DPC):
         """
         return cp.Constant(0)
 
-    def get_predictor_constraint_expression(self) -> cp.constraints.Constraint:
+    def get_predictor_constraint_expression(self) -> cp.Constraint:
         r"""
         Calculates and returns the CVXPY expression for the predictor constraint f.
 
@@ -93,7 +93,7 @@ class SPC(DPC):
             y_f = S  \begin{bmatrix} z_p \\ u_f \end{bmatrix}
 
         Returns:
-            cp.constraints.Constraint: The CVXPY constraint for the predictor constraint.
+            cp.Constraint: The CVXPY constraint for the predictor constraint.
 
         Raises:
             ValueError: If any matrix in the constraint is not correctly defined.

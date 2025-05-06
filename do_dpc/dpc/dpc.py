@@ -68,7 +68,7 @@ class DPC(ABC):
     Args:
         dpc_params (DPCParameters): Controller configuration parameters.
         training_data (InputOutputTrajectory): Collected trajectory data.
-        **Kwargs: Additional keyword arguments.
+        **kwargs: Additional keyword arguments.
     """
 
     _registry: Dict[str, Type["DPC"]] = {}  # Stores registered subclasses for dynamic instantiation
@@ -147,23 +147,23 @@ class DPC(ABC):
         """
 
     @abstractmethod
-    def get_predictor_constraint_expression(self) -> cp.constraints.Constraint:
+    def get_predictor_constraint_expression(self) -> cp.Constraint:
         """
         Calculates and returns the CVXPY expression for the predictor constraint f.
 
         Returns:
-            cp.constraints.Constraint: The CVXPY constraint for the predictor constraint.
+            cp.Constraint: The CVXPY constraint for the predictor constraint.
         """
 
     # pylint: disable=unused-argument
-    def __init__(self, dpc_params: DPCParameters, training_data: InputOutputTrajectory, **Kwargs):
+    def __init__(self, dpc_params: DPCParameters, training_data: InputOutputTrajectory, **kwargs):
         """
         Initializes the DPC controller.
 
         Args:
             dpc_params (DPCParameters): Controller configuration parameters.
             training_data (InputOutputTrajectory): Collected trajectory data.
-            **Kwargs: Additional keyword arguments.
+            **kwargs: Additional keyword arguments.
         """
 
         # Validate arguments
