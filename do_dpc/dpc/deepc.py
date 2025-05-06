@@ -233,16 +233,24 @@ class DeePC(DPC):
         Conditions:
             - If `lambda_g_1` is nonzero, return None (1-norm differentiation issue).
             - If `lambda_sigma` is infinite, return None.
-            - If `lambda_p` is zero, return None.
+            - If `lambda_p` is zero, warning.
         """
         if self.specific_params.lambda_g_1 != 0:
+            logger.warning(
+                "lambda_g_1 is different from 0. Cannot calculate the closed-form solution (only quadratic cost). "
+            )
             return None
 
         if self.specific_params.lambda_sigma == np.inf:
+            logger.warning(
+                "lambda_sigma is set to np.inf. Cannot calculate the closed-form solution. "
+            )
             return None
 
         if self.specific_params.lambda_p == 0:
-            return None
+            logger.warning(
+                "lambda_p is set to 0. "
+            )
 
         I_minus_Pi = self.reg_matrices.I_minus_Pi  # type: ignore
         U_f = self.hankel_matrices.U_f
