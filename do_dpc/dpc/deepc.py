@@ -144,15 +144,16 @@ class DeePC(DPC):
         """
         Initializes the DeePC controller.
         """
+
+        # Specific parameters
+        self.specific_params = DeePCSpecificParameters(suppress_warnings=True)
+        self.specific_params_set = False
+
         super().__init__(dpc_params, training_data)
 
         # Additional slack variables
         self.g_cp = cp.Variable(self.hankel_matrices.n_col)
         self.sigma_cp = self._construct_sigma()
-
-        # Specific parameters
-        self.specific_params = DeePCSpecificParameters(suppress_warnings=True)
-        self.specific_params_set = False
 
     def calculate_predictor_matrices(self) -> DeePCPredictorMatrices:
         """DeePC does not have any predictor matrices"""
