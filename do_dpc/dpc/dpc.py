@@ -304,7 +304,7 @@ class DPC(ABC):
             if self.problem.status in ["optimal_inaccurate"]:
                 logger.warning("Optimization result is inaccurate.")
 
-        except cp.error.SolverError as e:
+        except cp.SolverError as e:
             raise RuntimeError(f"Solver encountered an error: {str(e)}") from e
 
         self.control_step = 0
