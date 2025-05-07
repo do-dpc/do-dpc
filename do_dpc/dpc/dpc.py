@@ -16,7 +16,6 @@ Subclasses must implement:
 
 import logging
 from abc import ABC, abstractmethod
-from cmath import sqrt
 from typing import Type, Callable, Dict, Optional
 
 import cvxpy as cp
@@ -617,7 +616,7 @@ class DPC(ABC):
             Z[i * mp : (i + 1) * mp, :] = z[:, i : i + n_col]
 
         # Normalize matrices
-        sqrt_n_col = sqrt(n_col)
+        sqrt_n_col = np.sqrt(n_col)
         return HankelMatrices(
             Z=Z / sqrt_n_col,
             Z_p=Z_p / sqrt_n_col,
