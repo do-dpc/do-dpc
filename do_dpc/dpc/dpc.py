@@ -185,12 +185,12 @@ class DPC(ABC):
             DPCUtils.check_valid_closed_form_gains(self.dims, self.cf_matrices)
 
         # Closed-form solution
-        self.u_f = np.zeros((self.dims.n_u_f,))
+        self.u_f = np.zeros(self.dims.n_u_f)
         self.is_unconstrained = True
 
         # CVXPY Optimization Problem Initialization
         self.constr: list[Constraint] = []
-        self.cost = 0
+        self.cost: cp.Expression = 0
         self.problem = cp.Problem(cp.Minimize(self.cost), self.constr)  # type: ignore
         self.valid_optimization_problem = False
 
@@ -204,7 +204,7 @@ class DPC(ABC):
         self.z_p_cp = cp.Parameter(shape=self.dims.n_z_p, value=np.zeros(self.dims.n_z_p))
 
         # Control step tracker
-        self.control_step = 0
+        self.control_step: int = 0
 
         # MPC CF (special case)
         self.use_mpc_cf = False
