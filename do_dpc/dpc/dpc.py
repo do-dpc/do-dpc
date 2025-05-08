@@ -60,7 +60,7 @@ class DPC(ABC):
         z_p_cp (cp.Parameter): Parameter related to perturbations or uncertainties in the system.
         u_f (np.ndarray): Offline computed control input (closed-form solution).
         is_unconstrained (bool): Flag indicating if the optimization is unconstrained.
-        cf_gains (np.ndarray): Closed-form gains computed for the controller.
+        cf_matrices (np.ndarray): Closed-form gains computed for the controller.
         control_step (int): Counter for the number of control steps taken.
         use_mpc_cf (bool): Flag indicating if MPC closed-form is used.
 
@@ -259,7 +259,7 @@ class DPC(ABC):
 
         Raises:
             ValueError: If the optimization problem is not properly built.
-            ValueError: If the cf_gains are None while using the closed-form solution.
+            ValueError: If the cf_matrices are None while using the closed-form solution.
             RuntimeError: If the solver encounters an issue or produces an infeasible result.
             Warning: If another solver than Mosek is used.
         """
@@ -632,7 +632,7 @@ class DPC(ABC):
 
         The closed-form solution can be used if:
            - The optimization problem is unconstrained (`self.is_unconstrained` is True).
-           - Closed-form gain matrices (`self.cf_gains`) are available (not None).
+           - Closed-form gain matrices (`self.cf_matrices`) are available (not None).
 
         Returns:
             bool: True if the closed-form solution is applicable, False otherwise.
