@@ -185,7 +185,7 @@ class DPC(ABC):
             DPCUtils.check_valid_closed_form_gains(self.dims, self.cf_matrices)
 
         # Closed-form solution
-        self.u_f = np.array((self.dims.n_u_f,))
+        self.u_f = np.zeros((self.dims.n_u_f,))
         self.is_unconstrained = True
 
         # CVXPY Optimization Problem Initialization
