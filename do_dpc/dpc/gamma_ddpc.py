@@ -146,7 +146,7 @@ class GammaDDPC(DPC):
         cost += self.lambda_gamma_2 * cp.norm(self.gamma_2_cp, 2) ** 2
         return cost
 
-    def get_predictor_constraint_expression(self) -> cp.constraints.Constraint:
+    def get_predictor_constraint_expression(self) -> cp.Constraint:
         r"""
         Calculates and returns the CVXPY constraint for the predictor constraint.
 
@@ -157,7 +157,7 @@ class GammaDDPC(DPC):
             \begin{bmatrix} u_f \\ y_f \end{bmatrix} = L_{23} \begin{bmatrix} \gamma_1 \\ \gamma_2 \end{bmatrix}
 
         Returns:
-            cp.constraints.Constraint: The CVXPY constraint for the predictor constraint.
+            cp.Constraint: The CVXPY constraint for the predictor constraint.
         """
 
         # Setting gamma_1 = L_11^-1 z_p

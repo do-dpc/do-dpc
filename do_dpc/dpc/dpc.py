@@ -16,7 +16,6 @@ Subclasses must implement:
 
 import logging
 from abc import ABC, abstractmethod
-from cmath import sqrt
 from typing import Type, Callable, Dict, Optional
 
 import cvxpy as cp
@@ -61,14 +60,14 @@ class DPC(ABC):
         z_p_cp (cp.Parameter): Parameter related to perturbations or uncertainties in the system.
         u_f (np.ndarray): Offline computed control input (closed-form solution).
         is_unconstrained (bool): Flag indicating if the optimization is unconstrained.
-        cf_gains (np.ndarray): Closed-form gains computed for the controller.
+        cf_matrices (np.ndarray): Closed-form gains computed for the controller.
         control_step (int): Counter for the number of control steps taken.
         use_mpc_cf (bool): Flag indicating if MPC closed-form is used.
 
     Args:
         dpc_params (DPCParameters): Controller configuration parameters.
         training_data (InputOutputTrajectory): Collected trajectory data.
-        **Kwargs: Additional keyword arguments.
+        **kwargs: Additional keyword arguments.
     """
 
     _registry: Dict[str, Type["DPC"]] = {}  # Stores registered subclasses for dynamic instantiation
@@ -147,23 +146,23 @@ class DPC(ABC):
         """
 
     @abstractmethod
-    def get_predictor_constraint_expression(self) -> cp.constraints.Constraint:
+    def get_predictor_constraint_expression(self) -> cp.Constraint:
         """
         Calculates and returns the CVXPY expression for the predictor constraint f.
 
         Returns:
-            cp.constraints.Constraint: The CVXPY constraint for the predictor constraint.
+            cp.Constraint: The CVXPY constraint for the predictor constraint.
         """
 
     # pylint: disable=unused-argument
-    def __init__(self, dpc_params: DPCParameters, training_data: InputOutputTrajectory, **Kwargs):
+    def __init__(self, dpc_params: DPCParameters, training_data: InputOutputTrajectory, **kwargs):
         """
         Initializes the DPC controller.
 
         Args:
             dpc_params (DPCParameters): Controller configuration parameters.
             training_data (InputOutputTrajectory): Collected trajectory data.
-            **Kwargs: Additional keyword arguments.
+            **kwargs: Additional keyword arguments.
         """
 
         # Validate arguments
@@ -186,12 +185,12 @@ class DPC(ABC):
             DPCUtils.check_valid_closed_form_gains(self.dims, self.cf_matrices)
 
         # Closed-form solution
-        self.u_f = np.array((self.dims.n_u_f,))
+        self.u_f = np.zeros(self.dims.n_u_f)
         self.is_unconstrained = True
 
         # CVXPY Optimization Problem Initialization
         self.constr: list[Constraint] = []
-        self.cost = 0
+        self.cost: cp.Expression = 0
         self.problem = cp.Problem(cp.Minimize(self.cost), self.constr)  # type: ignore
         self.valid_optimization_problem = False
 
@@ -205,7 +204,7 @@ class DPC(ABC):
         self.z_p_cp = cp.Parameter(shape=self.dims.n_z_p, value=np.zeros(self.dims.n_z_p))
 
         # Control step tracker
-        self.control_step = 0
+        self.control_step: int = 0
 
         # MPC CF (special case)
         self.use_mpc_cf = False
@@ -260,7 +259,7 @@ class DPC(ABC):
 
         Raises:
             ValueError: If the optimization problem is not properly built.
-            ValueError: If the cf_gains are None while using the closed-form solution.
+            ValueError: If the cf_matrices are None while using the closed-form solution.
             RuntimeError: If the solver encounters an issue or produces an infeasible result.
             Warning: If another solver than Mosek is used.
         """
@@ -304,7 +303,7 @@ class DPC(ABC):
             if self.problem.status in ["optimal_inaccurate"]:
                 logger.warning("Optimization result is inaccurate.")
 
-        except cp.error.SolverError as e:
+        except cp.SolverError as e:
             raise RuntimeError(f"Solver encountered an error: {str(e)}") from e
 
         self.control_step = 0
@@ -617,7 +616,7 @@ class DPC(ABC):
             Z[i * mp : (i + 1) * mp, :] = z[:, i : i + n_col]
 
         # Normalize matrices
-        sqrt_n_col = sqrt(n_col)
+        sqrt_n_col = np.sqrt(n_col)
         return HankelMatrices(
             Z=Z / sqrt_n_col,
             Z_p=Z_p / sqrt_n_col,
@@ -633,7 +632,7 @@ class DPC(ABC):
 
         The closed-form solution can be used if:
            - The optimization problem is unconstrained (`self.is_unconstrained` is True).
-           - Closed-form gain matrices (`self.cf_gains`) are available (not None).
+           - Closed-form gain matrices (`self.cf_matrices`) are available (not None).
 
         Returns:
             bool: True if the closed-form solution is applicable, False otherwise.

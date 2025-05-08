@@ -137,7 +137,7 @@ class TPC(DPC):
 
         return cost
 
-    def get_predictor_constraint_expression(self) -> cp.constraints.Constraint:
+    def get_predictor_constraint_expression(self) -> cp.Constraint:
         r"""
         Calculates and returns the CVXPY expression for the predictor constraint f.
 
@@ -147,7 +147,7 @@ class TPC(DPC):
             y_f = H_u u_f + H_p z_p
 
         Returns:
-            cp.constraints.Constraint: The CVXPY constraint for the predictor constraint.
+            cp.Constraint: The CVXPY constraint for the predictor constraint.
 
         Raises:
             ValueError: If any matrix in the constraint is not correctly defined.

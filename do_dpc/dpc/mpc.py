@@ -177,7 +177,7 @@ class MPC(DPC, ABC):
         """
         return cp.Constant(0.0)
 
-    def get_predictor_constraint_expression(self) -> cp.constraints.Constraint:
+    def get_predictor_constraint_expression(self) -> cp.Constraint:
         r"""
         Calculates and returns the CVXPY constraint for the predictor constraint.
 
@@ -187,7 +187,7 @@ class MPC(DPC, ABC):
             y_f = \Gamma x + H_u u_f
 
         Returns:
-            cp.constraints.Constraint: The CVXPY constraint for the predictor constraint.
+            cp.Constraint: The CVXPY constraint for the predictor constraint.
         """
 
         return (  # type: ignore
