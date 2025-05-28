@@ -36,8 +36,60 @@ py -m venv venv
 .\venv\Scripts\activate
 pip install -r requirements.txt
 ```
+## Additional Tools: SWIG
 
-### Building the documentation
+The library `boxd2` requires [SWIG](http://www.swig.org/), the Simplified Wrapper and Interface Generator.  
+**SWIG** is a tool that connects programs written in C or C++ with high-level languages such as Python. 
+It is necessary for building Python bindings to C/C++ code, which is how `boxd2` exposes its functionality to Python.
+
+### Installing SWIG
+
+#### Windows
+
+- **Via Chocolatey** (recommended):
+  ```sh
+  choco install swig
+  ```
+- **Manual download**:  
+  Download the installer from [swig.org/download.html](http://www.swig.org/download.html) and follow the installation instructions.
+
+#### macOS
+
+- **Via Homebrew**:
+  ```sh
+  brew install swig
+  ```
+
+#### Linux (Debian/Ubuntu)
+
+- **Via apt**:
+  ```sh
+  sudo apt-get update
+  sudo apt-get install swig
+  ```
+
+- For other distributions, use the appropriate package manager (`dnf`, `yum`, `pacman`, etc.).
+
+
+## Example Usage
+
+Once your environment is set up and dependencies installed, you can use `boxd2` in your Python code:
+
+```python
+import boxd2
+
+# Example: create a box and compute its area
+box = boxd2.Box(2, 3)
+print("Area:", box.area())
+```
+
+---
+
+**Note:**  
+If you encounter build errors related to SWIG when installing or using `boxd2`, ensure that SWIG is correctly installed and available in your system's PATH.
+
+
+## Building the documentation
 
 Navigate to the `docs` Folder:
 
