@@ -162,4 +162,4 @@ do-dpc/
 
 
 # Original authorship
-The original do-dpc package was created by Keith Moffat and Sebastian Graf at ETH Zurich in 2025, funded by the NCCR Automation grant in Prof. Florian Dörfler’s lab. Much of the code and many of the ideas are based on code and work by Prof. Alessandro Chiuso at the University of Padua.
+The original do-dpc package was created by Keith Moffat and Sebastian Graf at ETH Zurich in 2025, with funding from Swiss NCCR Automation in Prof. Florian Dörfler’s lab. Much of the code and many of the ideas are based on code and work by Prof. Alessandro Chiuso at the University of Padua.
