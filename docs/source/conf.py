@@ -13,8 +13,8 @@ sys.path.append(os.path.abspath(os.path.join(".")))
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "do-dpc"
-copyright = "2025, Sebastian Graf"
-author = "Sebastian Graf"
+copyright = "2025, Keith Moffat and Sebastian Graf"
+author = "Keith Moffat and Sebastian Graf"
 release = "0.1.0"
 
 # -- General configuration ---------------------------------------------------
