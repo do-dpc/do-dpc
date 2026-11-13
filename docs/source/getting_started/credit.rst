@@ -1,6 +1,8 @@
 Credit
 ======
-The developers of **do-dpc** own credit to CVXPY_ which run at the core of the DPC package.
+The original do-dpc package was created by Keith Moffat and Sebastian Graf at ETH Zurich in 2025, with funding from Swiss NCCR Automation in Prof. Florian Dörfler’s lab. Much of the code and many of the ideas are based on code and work by Prof. Alessandro Chiuso at the University of Padua.
+
+CVXPY_ runs at the core of the DPC package.
 
 .. _CVXPY: https://www.cvxpy.org/
 
