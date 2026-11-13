@@ -1,3 +1,5 @@
+# The original do-dpc package was created by Sebastian Graf and Keith Moffat at ETH Zurich in 2025, funded by the NCCR Automation grant in Prof. Florian Dorfler's lab. Much of the code and ideas are based off of code and work by Prof. Alessandro Chiuso and the University of Padoa.
+
 # Do DPC
 
 ![Pipeline Status](https://github.com/do-dpc/do-dpc/actions/workflows/ci.yml/badge.svg)
